@@ -31,7 +31,7 @@ int main()
     RotatedRect rot_rect1 = minAreaRect(contours[0]);
     Point center1 = rot_rect1.center;
 
-    // Èùåì âñå îêðóæíîñòè íà êàðòèíêå
+    // search circles
     vector<Vec3f> circles;
     HoughCircles(mask, circles, HOUGH_GRADIENT, 1,
         mask.rows / 32,  // change this value to detect circles with different distances to each other
@@ -39,7 +39,7 @@ int main()
    // (min_radius & max_radius) to detect larger circles
     );
 
-    //Íàíîñèì òî÷êè, îêðóæíîñòè è êîîðäèíàòû íà èçíà÷àëüíóþ êàðòèíêó
+    //search coordinates
     for (size_t i = 0; i < circles.size(); i++)
     {
         Vec3i c = circles[i];
@@ -57,7 +57,7 @@ int main()
         putText(img0, coordinates, center, 4, 0.5, (0, 250, 0));
     }
 
-    // Âûâîä ðåçóëüòàòà ðàáîòû
+    // output image
     namedWindow("Display window", WINDOW_AUTOSIZE);
     imshow("Display window", img0);
     waitKey(0);
